@@ -1,26 +1,117 @@
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Brunch example application</title>
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="stylesheets/app.css">
-  <script src="javascripts/vendor.js"></script>
-  <script src="javascripts/app.js"></script>
-  <script>require('init');</script>
-</head>
-<body>
-    <header class="header-container" id="header-container">
-        <h1></h1>
-    </header>
+  <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+  <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+  <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>aktos-dcs-webui</title>
+    <meta name="viewport" content="width=device-width; target-densitydpi=device-dpi; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <link rel="stylesheet" href="stylesheets/app.css">
+  </head>
+  <body>
+    <div id="container" ></div>
+    <script id='app' type='text/ractive'>
 
-  <div class="container outer-container">
-    <div class="page-container" id="page-container">
-    </div>
-  </div>
-</body>
+        <style type="text/css">
+            #header1 {
+              background-color: white;
+              background-image: url('static/img/header.png');
+              background-repeat: no-repeat;
+              background-size:contain;
+              height:200px;
+              width: 100%;
+            }
+            #connection_status {
+              background-color: {{ connected ? "yellowgreen" : "lightgray" }};
+              font-size: 1.5em;
+              padding: 1.5em;
+            }
+
+        </style>
+
+        <!-- -------------------------- LIB ------------------------------------------------ -->
+
+        <!-- {{>io_cmd_button}} -->
+        <ul style="margin: 10px; border: 1px solid yellowgreen; padding: 10px;">
+            {{#button.pins}}
+              <li style="margin: 2em">
+              {{#if (button.type === 'output')}}
+                      SET output #<span style="font-size: 1.3em;">{{.pin}}</span>: {{>io_switch {pin: .pin}}}
+              {{else}}<img style="width: 100px; height: 100px;" src="static/img/light-bulb-icon-{{ .state === "true" ? "on" : "off" }}-64.png" />
+                    READ #{{.pin}}: &lt;&lt;{{.state}}&gt;&gt;
+              {{/if}}
+              </li>
+            {{/button.pins}}
+
+        </ul>
+      <!-- {{/io_cmd_button}} -->
+      <!-- {{>io_switch}} -->
+        {{! ------------------------------------------------------------------------------------
+          # Documentation:
+            params: button object.
+              .pin           : pin number of input/output pin.
+              .state         : used for switch's gui state
+              .current_state : used for pysical state
+              .connected     : used for indicating the connection status
+        ---------------------------------------------------------------------------------------- }}
+        <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
+      <!-- {{/io_switch}} -->
+
+      <!-- {{>analog_input}} -->
+      <!-- {{/analog_input}} -->
+
+      <!-- -------------------------- /LIB ------------------------------------------------ -->
+
+
+
+
+      <div id='header1'></div>
+      <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
+
+      <h2> Analog input </h2>
+      <p> Input value: {{analog_input}} </p>
+
+
+      <h2> Input Output Test </h2>
+      {{#io_button}}
+        <h3>{{.type}}</h3>
+        {{>io_cmd_button {button: .}}}
+      {{/io_button}}
+
+      <!-- {{>msgline}} -->
+      <div style="background-color: yellowgreen"><span>{{user}} says: </span>{{msg}}</div>
+      <!-- {{/msgline}} -->
+
+
+
+      <div style="margin: 10px; border: 1px solid yellowgreen; padding: 20px">
+        {{#if connected}}
+          <div style="height: 20%; overflow-y: scroll">
+              {{#messages}}
+                  {{>msgline {user: .user, msg: .text}}}
+              {{/messages}}
+          </div>
+        {{/if}}
+        <p>
+          Chat input: <input id="m" autocomplete="off" />
+          <span id="submitbutton" style="border: 1px solid black; background-color: yellowgreen;">send</span>
+        </p>
+        <ul>
+          <li>Write something, then press "enter" or click "send" text </li>
+          <li>Write a number between 0 and 100, it will show up in the grap screen in realtime</li>
+        </ul>
+        <h2> Realtime Graph </h2>
+        <div id="demo-container" style="height: 200px">
+          <div id="placeholder1"  class="demo-placeholder" ></div>
+        </div>
+      </div>
+    </script>
+
+    <script src="javascripts/vendor.js"></script>
+    <script src="javascripts/app.js"></script>
+    <script>require('init');</script>
+
+  </body>
 </html>
