@@ -10,45 +10,68 @@
     <meta name="viewport" content="width=device-width; target-densitydpi=device-dpi; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <script src="javascripts/vendor.js"></script>
     <script src="javascripts/app.js"></script>
+    <link rel="ractive" href="ractive-partials.html">
     <link rel="stylesheet" href="stylesheets/app.css">
   </head>
   <body>
     <div id="container" ></div>
     <script id='app' type='text/ractive'>
-    {{>test_partial}}
-  <!-- -------------------------- LIB ------------------------------------------------ -->
-    <!-- {{>io_cmd_button}} -->
-    <ul style="margin: 10px; border: 1px solid yellowgreen; padding: 10px;">
-        {{#button.pins}}
-          <li style="margin: 2em">
-          {{#if (button.type === 'output')}}
-                  SET output #<span style="font-size: 1.3em;">{{.pin}}</span>: {{>io_switch {pin: .pin}}}
-          {{else}}<img style="width: 100px; height: 100px;" src="static/img/light-bulb-icon-{{ .state === "true" ? "on" : "off" }}-64.png" />
-                READ #{{.pin}}: &lt;&lt;{{.state}}&gt;&gt;
-          {{/if}}
-          </li>
-        {{/button.pins}}
+      {{!}}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+        {{! ----------------- START OF PARTIALS  ------------- }}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
 
-    </ul>
-    <!-- {{/io_cmd_button}} -->
-    <!-- {{>io_switch}} -->
-    {{! ------------------------------------------------------------------------------------
-      # Documentation:
-        params: button object.
-          .pin           : pin number of input/output pin.
-          .state         : used for switch's gui state
-          .current_state : used for pysical state
-          .connected     : used for indicating the connection status
-    ---------------------------------------------------------------------------------------- }}
-    <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
-    <!-- {{/io_switch}} -->
 
-    <!-- {{>analog_input}} -->
-    <!-- {{/analog_input}} -->
+        {{#partial test_partial}}
+          <p>This is test partial</p>
+        {{/partial}}
 
-    <!-- -------------------------- /LIB ------------------------------------------------ -->
+        {{#partial io_cmd_button}}
+          <ul style="margin: 10px; border: 1px solid yellowgreen; padding: 10px;">
+              {{#button.pins}}
+                <li style="margin: 2em">
+                {{#if (button.type === 'output')}}
+                        SET output #<span style="font-size: 1.3em;">{{.pin}}</span>: {{>io_switch {pin: .pin}}}
+                {{else}}<img style="width: 100px; height: 100px;" src="static/img/light-bulb-icon-{{ .state === "true" ? "on" : "off" }}-64.png" />
+                      READ #{{.pin}}: &lt;&lt;{{.state}}&gt;&gt;
+                {{/if}}
+                </li>
+              {{/button.pins}}
+            </ul>
+        {{/partial}}
 
-        <style type="text/css">
+        {{#partial io_switch}}
+          {{! -------------------------------------------------
+            # Documentation:
+              params: button object.
+                .pin           : pin number of input/output pin.
+                .state         : used for switch's gui state
+                .current_state : used for pysical state
+                .connected     : used for indicating the connection status
+          ----------------------------------------------------- }}
+          <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
+        {{/partial}}
+
+        {{#partial analog_input}}
+        {{/partial}}
+
+        {{#partial msgline}}
+          <div style="background-color: yellowgreen"><span>{{user}} says: </span>{{msg}}</div>
+        {{/partial}}
+
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+        {{! ----------------- END OF PARTIALS  --------------- }}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+        {{! -------------------------------------------------- }}
+
+      <style type="text/css">
           #header1 {
             background-color: white;
             background-image: url('static/img/header.png');
@@ -62,11 +85,10 @@
             font-size: 1.5em;
             padding: 1.5em;
           }
-
         </style>
 
 
-
+      {{>test_partial}}
 
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
@@ -80,12 +102,6 @@
         <h3>{{.type}}</h3>
         {{>io_cmd_button {button: .}}}
       {{/io_button}}
-
-      <!-- {{>msgline}} -->
-      <div style="background-color: yellowgreen"><span>{{user}} says: </span>{{msg}}</div>
-      <!-- {{/msgline}} -->
-
-
 
       <div style="margin: 10px; border: 1px solid yellowgreen; padding: 20px">
         {{#if connected}}
