@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width; target-densitydpi=device-dpi; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <script src="javascripts/vendor.js"></script>
     <script src="javascripts/app.js"></script>
-    <link rel="ractive" href="ractive-partials.html">
     <link rel="stylesheet" href="stylesheets/app.css">
   </head>
   <body>
@@ -25,10 +24,6 @@
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
 
-
-        {{#partial test_partial}}
-          <p>This is test partial</p>
-        {{/partial}}
 
         {{#partial io_cmd_button}}
           <ul style="margin: 10px; border: 1px solid yellowgreen; padding: 10px;">
@@ -93,36 +88,7 @@
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
 
-      <h2> Analog input </h2>
-      <p> Input value: {{analog_input}} </p>
 
-
-      {{#io_button}}
-        <h3>{{.type}}</h3>
-        {{>io_cmd_button {button: .}}}
-      {{/io_button}}
-
-      <div style="margin: 10px; border: 1px solid yellowgreen; padding: 20px">
-        {{#if connected}}
-          <div style="height: 20%; overflow-y: scroll">
-              {{#messages}}
-                  {{>msgline {user: .user, msg: .text}}}
-              {{/messages}}
-          </div>
-        {{/if}}
-        <p>
-          Chat input: <input id="m" autocomplete="off" />
-          <span id="submitbutton" style="border: 1px solid black; background-color: yellowgreen;">send</span>
-        </p>
-        <ul>
-          <li>Write something, then press "enter" or click "send" text </li>
-          <li>Write a number between 0 and 100, it will show up in the grap screen in realtime</li>
-        </ul>
-        <h2> Realtime Graph </h2>
-        <div id="demo-container" style="height: 200px">
-          <div id="placeholder1"  class="demo-placeholder" ></div>
-        </div>
-      </div>
     </script>
 
     <script>require('init');</script>
