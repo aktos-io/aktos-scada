@@ -87,8 +87,8 @@
           }
         </style>
 
-
-      {{>test_partial}}
+      <h2> Input Output Test </h2>
+      {{>io_switch {pin: 5}}}
 
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
@@ -97,7 +97,6 @@
       <p> Input value: {{analog_input}} </p>
 
 
-      <h2> Input Output Test </h2>
       {{#io_button}}
         <h3>{{.type}}</h3>
         {{>io_cmd_button {button: .}}}
