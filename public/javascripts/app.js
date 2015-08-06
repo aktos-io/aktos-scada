@@ -359,12 +359,15 @@ setPushButtons = function(){
     pinName = jqElem.data('pin-name');
     actor = SwitchActor(pinName);
     jqElem.on('mousedown touchstart', function(){
+      jqElem.addClass('button-active-state');
       actor.sendEvent(true);
       return jqElem.on('mouseleave', function(){
+        jqElem.removeClass('button-active-state');
         return actor.sendEvent(false);
       });
     });
     jqElem.on('mouseup touchend touchcancel touchmove', function(){
+      jqElem.removeClass('button-active-state');
       actor.sendEvent(false);
       return jqElem.off('mouseleave');
     });

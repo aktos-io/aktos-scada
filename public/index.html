@@ -26,12 +26,15 @@
         {{! -------------------------------------------------- }}
 
         <style>
+          .push-button {
+            border-radius: 6px;
+          }
           .button-active-state {
-            background-color: black
+            background-color: #293f50;
           }
         </style>
         {{#partial push_button}}
-          <button style="width: 100px; height: 50px" class="push-button :active" data-pin-name={{.pin}} type="button">{{.label}}</button>
+          <button style="width: 100px; height: 50px" class="push-button" data-pin-name={{.pin}} type="button">{{.label}}</button>
         {{/partial}}
 
         {{#partial status_led}}
@@ -47,7 +50,7 @@
                 .current_state : used for pysical state
                 .connected     : used for indicating the connection status
           ----------------------------------------------------- }}
-          <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
+          <input class="blue small toggle-switch switch-actor" type="checkbox" value={{.pin}} />
           naber
         {{/partial}}
 
