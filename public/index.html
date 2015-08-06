@@ -24,19 +24,17 @@
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
 
+        <style>
+          .button-active-state {
+            background-color: black
+          }
+        </style>
+        {{#partial push_button}}
+          <button style="width: 100px; height: 50px" class="push-button :active" data-pin-name={{.pin}} type="button">{{.label}}</button>
+        {{/partial}}
 
-        {{#partial io_cmd_button}}
-          <ul style="margin: 10px; border: 1px solid yellowgreen; padding: 10px;">
-              {{#button.pins}}
-                <li style="margin: 2em">
-                {{#if (button.type === 'output')}}
-                        SET output #<span style="font-size: 1.3em;">{{.pin}}</span>: {{>io_switch {pin: .pin}}}
-                {{else}}<img style="width: 100px; height: 100px;" src="static/img/light-bulb-icon-{{ .state === "true" ? "on" : "off" }}-64.png" />
-                      READ #{{.pin}}: &lt;&lt;{{.state}}&gt;&gt;
-                {{/if}}
-                </li>
-              {{/button.pins}}
-            </ul>
+        {{#partial status_led}}
+          <img style="width: 100px; height: 100px;" class="status-led" data-pin-name={{.pin}} src="static/img/light-bulb-icon-{{ .state === "true" ? "on" : "off" }}-64.png" />
         {{/partial}}
 
         {{#partial io_switch}}
@@ -51,7 +49,10 @@
           <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
         {{/partial}}
 
-        {{#partial analog_input}}
+        {{#partial analog_display}}
+          <div style="min-width: 100px; min-height: 50px; border: 1px solid black"
+            class="analog-display" data-pin-name={{.pin}}>
+            {{.value}}</div>
         {{/partial}}
 
         {{#partial msgline}}
@@ -84,6 +85,20 @@
 
       <h2> Input Output Test </h2>
       {{>io_switch {pin: 5}}}
+      {{>io_switch {pin: 6}}}
+      {{>io_switch {pin: 7}}}
+      <br />
+      {{>push_button {pin: 6}}}
+      {{>push_button {pin: 9}}}
+      {{>push_button {pin: 10}}}
+      <br />
+      {{>status_led {pin: 11}}}
+      {{>status_led {pin: 12}}}
+      {{>status_led {pin: 13}}}
+      <br />
+      {{>analog_display {channel: 1}}}
+      {{>analog_display {channel: 2}}}
+      {{>analog_display {channel: 3, value: "12345"}}}
 
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
