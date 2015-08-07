@@ -35,11 +35,11 @@
         {{#partial push-button}}
           {{!----------------------------------------------------
             pin_name : name of this io
-            label : text (or html) to be shown on the push button
+            label : text to be shown on the push button
             val : value of button (which is set externally)
           ------------------------------------------------------}}
 
-          <button style="width: 100px; height: 50px" class="push-button" type="button">{{.label}}</button>
+          <button style="width: 100px; height: 50px" class="push-button" type="button" >{{.label}}</button>
         {{/partial}}
 
         {{#partial status-led}}
@@ -101,9 +101,11 @@
       {{>toggle-switch {pin_name: 'button-2'}}}
       {{>toggle-switch {pin_name: 'button-3'}}}
       <br />
-      {{>push-button {pin_name: 'button-8'}}}
-      {{>push-button {pin_name: 'button-9'}}}
-      {{>push-button {pin_name: 'button-1'}}}
+      <br />
+      <br />
+      {{>push-button {pin_name: 'button-8', label: 'Buton 1'}}}
+      {{>push-button {pin_name: 'button-9', label: 'another buton'}}}
+      {{>push-button {pin_name: 'button-1', label: 'alias of button-1'}}}
       <br />
       {{>status-led {pin_name: 'button-1'}}}
       {{>status-led {pin_name: 12}}}
