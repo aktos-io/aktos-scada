@@ -33,32 +33,42 @@
           }
         </style>
         {{#partial push-button}}
-          <button style="width: 100px; height: 50px" class="push-button" data-pin-name={{.pin}} type="button">{{.label}}</button>
+          {{!----------------------------------------------------
+            pin_name : name of this io
+            label : text (or html) to be shown on the push button
+            val : value of button (which is set externally)
+          ------------------------------------------------------}}
+
+          <button style="width: 100px; height: 50px" class="push-button" type="button">{{.label}}</button>
         {{/partial}}
 
         {{#partial status-led}}
-          <img style="width: 100px; height: 100px;" class="status-led" data-pin-name={{.pin}} src="static/img/light-bulb-icon-{{ .state === true ? "on" : "off" }}-64.png" />
+          {{!----------------------------------------------------
+            pin_name : name of this io
+            val : value of this status led (which is set externally)
+          ------------------------------------------------------}}
+
+          <img style="width: 100px; height: 100px;" class="status-led"
+            src="static/img/light-bulb-icon-{{ .val === true ? "on" : "off" }}-64.png" />
         {{/partial}}
 
         {{#partial toggle-switch}}
-          {{! -------------------------------------------------
-            # Documentation:
-              params: button object.
-                .pin           : pin number of input/output pin.
-                .state         : used for switch's gui state
-                .current_state : used for pysical state
-                .connected     : used for indicating the connection status
-          ----------------------------------------------------- }}
-          <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
+          {{!----------------------------------------------------
+            pin_name : name of this io
+            val : value of toggle-switch (which is set externally)
+          ------------------------------------------------------}}
+
+          <input class="blue small toggle-switch" type="checkbox" value={{.pin_name}} />
         {{/partial}}
 
         {{#partial analog-display}}
-          <input type="text" style=" width: 100px; height: 50px; border: 1px solid black"
-            class="analog-display" data-pin-name={{.pin}} value={{.value}} readonly >
-        {{/partial}}
+          {{!----------------------------------------------------
+            pin_name : name of this io
+            val : value of toggle-switch (which is set externally)
+          ------------------------------------------------------}}
 
-        {{#partial msgline}}
-          <div style="background-color: yellowgreen"><span>{{user}} says: </span>{{msg}}</div>
+          <input type="text" style=" width: 100px; height: 50px; border: 1px solid black"
+            class="analog-display" value={{.val}} readonly >
         {{/partial}}
 
 
@@ -87,21 +97,21 @@
         </style>
 
       <h2> Input Output Test </h2>
-      {{>toggle-switch {pin: 'button-1'}}}
-      {{>toggle-switch {pin: 'button-2'}}}
-      {{>toggle-switch {pin: 'button-3'}}}
+      {{>toggle-switch {pin_name: 'button-1'}}}
+      {{>toggle-switch {pin_name: 'button-2'}}}
+      {{>toggle-switch {pin_name: 'button-3'}}}
       <br />
-      {{>push-button {pin: 'button-8'}}}
-      {{>push-button {pin: 'button-9'}}}
-      {{>push-button {pin: 'button-1'}}}
+      {{>push-button {pin_name: 'button-8'}}}
+      {{>push-button {pin_name: 'button-9'}}}
+      {{>push-button {pin_name: 'button-1'}}}
       <br />
-      {{>status-led {pin: 'button-1'}}}
-      {{>status-led {pin: 12}}}
-      {{>status-led {pin: 13}}}
+      {{>status-led {pin_name: 'button-1'}}}
+      {{>status-led {pin_name: 12}}}
+      {{>status-led {pin_name: 13}}}
       <br />
-      {{>analog-display {channel: 'analog-1'}}}
-      {{>analog-display {channel: 'analog-2'}}}
-      {{>analog-display {channel: 'analog-3'}}}
+      {{>analog-display {pin_name: 'analog-1'}}}
+      {{>analog-display {pin_name: 'analog-2'}}}
+      {{>analog-display {pin_name: 'analog-3'}}}
       <br />
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
