@@ -316,14 +316,7 @@ SwitchActor = (function(superclass){
 ProxyActor();
 app = new Ractive({
   template: '#app',
-  el: 'container',
-  data: {
-    connected: false
-  },
-  onrender: function(options){
-    this.set("text", "initial text value");
-    console.log('just rendered...');
-  }
+  el: 'container'
 });
 setSwitchButtons = function(){
   $('.toggle-switch').each(function(){
@@ -340,16 +333,20 @@ setSwitchButtons = function(){
     });
     s = new ToggleSwitch(elemDom, 'on', 'off');
     actor.addListener(function(msg){
+      var tmp;
+      tmp = s.fCallback;
+      s.fCallback = null;
       if (msg.val) {
-        return s.on();
+        s.on();
       } else {
-        return s.off();
+        s.off();
       }
+      s.fCallback = tmp;
+      return tmp = null;
     });
     s.addListener(function(state){
       actor.sendEvent(state);
     });
-    console.log('toggle-switch made');
   });
 };
 setPushButtons = function(){
@@ -386,10 +383,11 @@ setStatusLeds = function(){
     jqElem = $(this);
     pinName = jqElem.data('pin-name');
     actor = SwitchActor(pinName);
-    actor.addListener(function(msg){
-      return console.log("push button got message: ", msg);
+    return actor.addListener(function(msg){
+      var ractiveNode;
+      ractiveNode = Ractive.getNodeInfo(jqElem.get(0));
+      return app.set(ractiveNode['keypath'] + '.state', msg.val);
     });
-    return console.log(jqElem);
   });
 };
 app.on('complete', function(){

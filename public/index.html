@@ -7,8 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>aktos-dcs-webui</title>
-    <!--<meta name="viewport" content="width=device-width; target-densitydpi=device-dpi; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
-    -->
+    <meta name="viewport" content="width=device-width; target-densitydpi=device-dpi; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
     <script src="javascripts/vendor.js"></script>
     <script src="javascripts/app.js"></script>
     <link rel="stylesheet" href="stylesheets/app.css">
@@ -38,7 +37,7 @@
         {{/partial}}
 
         {{#partial status_led}}
-          <img style="width: 100px; height: 100px;" class="status-led" data-pin-name={{.pin}} src="static/img/light-bulb-icon-{{ .state === "true" ? "on" : "off" }}-64.png" />
+          <img style="width: 100px; height: 100px;" class="status-led" data-pin-name={{.pin}} src="static/img/light-bulb-icon-{{ .state === true ? "on" : "off" }}-64.png" />
         {{/partial}}
 
         {{#partial io_switch}}
@@ -50,19 +49,18 @@
                 .current_state : used for pysical state
                 .connected     : used for indicating the connection status
           ----------------------------------------------------- }}
-          <input class="blue small toggle-switch switch-actor" type="checkbox" value={{.pin}} />
-          naber
+          <input class="blue small toggle-switch" type="checkbox" value={{.pin}} />
         {{/partial}}
 
         {{#partial analog_display}}
-          <div style="min-width: 100px; min-height: 50px; border: 1px solid black"
-            class="analog-display" data-pin-name={{.pin}}>
-            {{.value}}</div>
+          <input type="text" style=" width: 100px; height: 50px; border: 1px solid black"
+            class="analog-display" data-pin-name={{.pin}} value={{.value}} readonly >
         {{/partial}}
 
         {{#partial msgline}}
           <div style="background-color: yellowgreen"><span>{{user}} says: </span>{{msg}}</div>
         {{/partial}}
+
 
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
@@ -89,28 +87,22 @@
         </style>
 
       <h2> Input Output Test </h2>
-      {{>io_switch {pin: 1}}}
-      {{>io_switch {pin: 2}}}
-      {{>io_switch {pin: 3}}}
-      <br />
-      <br />
-      <br />
       {{>io_switch {pin: 'button-1'}}}
       {{>io_switch {pin: 'button-2'}}}
       {{>io_switch {pin: 'button-3'}}}
       <br />
       {{>push_button {pin: 'button-8'}}}
       {{>push_button {pin: 'button-9'}}}
-      {{>push_button {pin: 'button-mahmut'}}}
+      {{>push_button {pin: 'button-1'}}}
       <br />
-      {{>status_led {pin: 11}}}
+      {{>status_led {pin: 'button-1'}}}
       {{>status_led {pin: 12}}}
       {{>status_led {pin: 13}}}
       <br />
       {{>analog_display {channel: analog-1}}}
       {{>analog_display {channel: analog-2}}}
       {{>analog_display {channel: analog-3, value: "12345"}}}
-
+      <br />
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
 
