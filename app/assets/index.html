@@ -45,7 +45,9 @@
             val : value of button (which is set externally)
           ------------------------------------------------------}}
 
-          <button style="width: 100px; height: 50px" class="push-button" type="button" >{{.label}}</button>
+          <button style="width: 100px; height: 50px"
+            class="switch-actor push-button"
+          type="button" >{{.label}}</button>
         {{/partial}}
 
         {{#partial status-led}}
@@ -54,17 +56,24 @@
             val : value of this status led (which is set externally)
           ------------------------------------------------------}}
 
-          <img style="width: 100px; height: 100px;" class="status-led"
-            src="static/img/light-bulb-icon-{{ .val === true ? "on" : "off" }}-64.png" />
+          <img style="width: 100px; height: 100px;"
+            class="switch-actor status-led"
+            src="img/light-bulb-icon-{{ .val === true ? "on" : "off" }}-64.png"
+            alt={{ .val === true ? "on" : "off" }} />
         {{/partial}}
 
-        {{#partial toggle-switch}}
+        {{#partial switch-button}}
           {{!----------------------------------------------------
             pin_name : name of this io
-            val : value of toggle-switch (which is set externally)
+            val : value of switch-button (which is set externally)
           ------------------------------------------------------}}
 
-          <input class="blue small toggle-switch" type="checkbox" value={{.pin_name}} />
+          <label><input
+            class="switch-actor switch-button"
+            {{! data-role="flipswitch" }}
+            type="checkbox" data-pin-name={{ .pin_name }} >
+            {{ .label == null ? .pin_name : .label }}
+          </label>
         {{/partial}}
 
         {{#partial analog-display}}
@@ -74,7 +83,7 @@
           ------------------------------------------------------}}
 
           <input type="text" style=" width: 100px; height: 50px; border: 1px solid black"
-            class="analog-display" value={{.val}} readonly >
+            class="switch-actor analog-display" value={{.val}} readonly >
         {{/partial}}
 
 
@@ -89,7 +98,7 @@
       <style type="text/css">
           #header1 {
             background-color: white;
-            background-image: url('static/img/header.png');
+            background-image: url('img/header.png');
             background-repeat: no-repeat;
             background-size:contain;
             height:200px;
@@ -103,15 +112,19 @@
         </style>
 
       <h2> Input Output Test </h2>
-      {{>toggle-switch {pin_name: 'button-1'}}}
-      {{>toggle-switch {pin_name: 'button-2'}}}
-      {{>toggle-switch {pin_name: 'button-3'}}}
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        {{>switch-button {pin_name: 'button-1', label: 'buton 1'}}}
+        {{>switch-button {pin_name: 'button-2'}}}
+        {{>switch-button {pin_name: 'button-3'}}}
+      </fieldset>
       <br />
       <br />
       <br />
-      {{>push-button {pin_name: 'button-8', label: 'Buton 1'}}}
-      {{>push-button {pin_name: 'button-9', label: 'another buton'}}}
-      {{>push-button {pin_name: 'button-1', label: 'alias of button-1'}}}
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        {{>push-button {pin_name: 'button-8', label: 'Buton 1'}}}
+        {{>push-button {pin_name: 'button-9', label: 'another buton'}}}
+        {{>push-button {pin_name: 'button-1', label: 'alias of button-1'}}}
+      </fieldset>
       <br />
       {{>status-led {pin_name: 'button-1'}}}
       {{>status-led {pin_name: 12}}}
@@ -121,6 +134,7 @@
       {{>analog-display {pin_name: 'analog-2'}}}
       {{>analog-display {pin_name: 'analog-3'}}}
       <br />
+
       <div id='header1'></div>
       <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
 
