@@ -67,13 +67,13 @@
             pin_name : name of this io
             val : value of switch-button (which is set externally)
           ------------------------------------------------------}}
-
-          <label><input
+          {{! <label> }}
+          <input
             class="switch-actor switch-button"
-            {{! data-role="flipswitch" }}
-            type="checkbox" data-pin-name={{ .pin_name }} >
-            {{ .label == null ? .pin_name : .label }}
-          </label>
+            data-role="flipswitch"
+            type="checkbox" data-pin-name={{ .pin_name }} checked='' >
+          {{!  {{ .label == null ? .pin_name : .label }}
+          {{! </label> }}
         {{/partial}}
 
         {{#partial analog-display}}
@@ -129,6 +129,7 @@
       {{>status-led {pin_name: 'button-1'}}}
       {{>status-led {pin_name: 12}}}
       {{>status-led {pin_name: 13}}}
+
       <br />
       {{>analog-display {pin_name: 'analog-1'}}}
       {{>analog-display {pin_name: 'analog-2'}}}
