@@ -99,8 +99,8 @@
             val : value of toggle-switch (which is set externally)
           ------------------------------------------------------}}
 
-          <label style=" width: 100px; height: 50px; border: 1px solid black"
-            class="switch-actor analog-display">{{.val}}<label>
+          <button style="padding: 1em; border: 1px solid white"
+            class="switch-actor analog-display">{{ .val == null ? ' ??? ' : .val }}</button>
         {{/partial}}
 
 
@@ -117,14 +117,15 @@
         <h2> Input Output Test </h2>
         <fieldset data-role="controlgroup" data-type="horizontal">
           {{>switch-button {pin_name: 'button-1', label: 'buton 1'}}}
-          {{>switch-button {pin_name: 'button-2'}}}
+          {{>switch-button {pin_name: 'dir'}}}
           {{>switch-button {pin_name: 'button-3'}}}
         </fieldset>
 
         <fieldset data-role="controlgroup" data-type="horizontal">
-          {{>push-button {pin_name: 'button-8', label: 'Buton 1'}}}
+          {{>push-button {pin_name: 'dir', label: 'direction'}}}
           {{>push-button {pin_name: 'button-9', label: 'buton 2'}}}
           {{>push-button {pin_name: 'button-1', label: 'sw 1'}}}
+          {{>push-button {pin_name: 'button-111', label: 'sw 2'}}}
         </fieldset>
 
         <fieldset data-role="controlgroup" data-type="horizontal">
