@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="stylesheets/app.css">
   </head>
   <body>
-    <div id="container" ></div>
+    <div id="container"></div>
     <script id='app' type='text/ractive'>
       {{!}}
         {{! -------------------------------------------------- }}
@@ -24,20 +24,7 @@
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
 
-        <style>
-          .push-button {
-            border-radius: 6px;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            -o-user-select: none;
-            user-select: none;
-          }
-          .button-active-state {
-            background-color: #293f50;
-          }
-        </style>
+
         {{#partial push-button}}
           {{!----------------------------------------------------
             pin_name : name of this io
@@ -62,19 +49,32 @@
             alt={{ .val === true ? "on" : "off" }} />
         {{/partial}}
 
-        {{#partial switch-button}}
+        {{#partial jq-flipswitch}}
           {{!----------------------------------------------------
             pin_name : name of this io
             val : value of switch-button (which is set externally)
           ------------------------------------------------------}}
-          {{! <label> }}
           <input
             class="switch-actor switch-button"
             data-role="flipswitch"
-            type="checkbox" data-pin-name={{ .pin_name }} checked='' >
-          {{!  {{ .label == null ? .pin_name : .label }}
-          {{! </label> }}
+            type="checkbox" data-pin-name={{ .pin_name }} >
         {{/partial}}
+
+        {{#partial switch-button-basic}}
+          {{!----------------------------------------------------
+            pin_name : name of this io
+            val : value of switch-button (which is set externally)
+          ------------------------------------------------------}}
+          <div style="display: inline-block; margin: 10px"><input
+            class="switch-actor switch-button"
+            type="checkbox" data-pin-name={{ .pin_name }} ></div>
+        {{/partial}}
+
+        {{#partial switch-button}}
+          {{!>switch-button-basic }}
+          {{>jq-flipswitch}}
+        {{/partial}}
+
 
         {{#partial analog-display}}
           {{!----------------------------------------------------
@@ -95,21 +95,7 @@
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
 
-      <style type="text/css">
-          #header1 {
-            background-color: white;
-            background-image: url('img/header.png');
-            background-repeat: no-repeat;
-            background-size:contain;
-            height:200px;
-            width: 100%;
-          }
-          #connection_status {
-            background-color: {{ connected ? "yellowgreen" : "lightgray" }};
-            font-size: 1.5em;
-            padding: 1.5em;
-          }
-        </style>
+      <div id="container" data-role="page" data-theme="b">
 
       <h2> Input Output Test </h2>
       <fieldset data-role="controlgroup" data-type="horizontal">
@@ -137,9 +123,9 @@
       <br />
 
       <div id='header1'></div>
-      <p id='connection_status'>{{connected? "connected..." : "connecting..." }}</p>
+      <p id='connection_status'  style='background-color: {{ connected ? "yellowgreen" : "lightgray" }}'>{{connected? "connected..." : "connecting..." }}</p>
 
-
+      </div>
     </script>
 
     <script>require('init');</script>
