@@ -25,7 +25,7 @@
         {{! -------------------------------------------------- }}
 
 
-        {{#partial push-button}}
+        {{#partial push-button-0}}
           {{!----------------------------------------------------
             pin_name : name of this io
             label : text to be shown on the push button
@@ -35,6 +35,10 @@
           <button style="width: 100px; height: 50px"
             class="switch-actor push-button"
           type="button" >{{.label}}</button>
+        {{/partial}}
+
+        {{#partial push-button}}
+          {{>push-button-0}}
         {{/partial}}
 
         {{#partial status-led}}
@@ -112,14 +116,18 @@
         {{>push-button {pin_name: 'button-1', label: 'alias of button-1'}}}
       </fieldset>
       <br />
+      <fieldset data-role="controlgroup" data-type="horizontal">
       {{>status-led {pin_name: 'button-1'}}}
       {{>status-led {pin_name: 12}}}
       {{>status-led {pin_name: 13}}}
+      </fieldset>
 
       <br />
+      <fieldset data-role="controlgroup" data-type="horizontal">
       {{>analog-display {pin_name: 'analog-1'}}}
       {{>analog-display {pin_name: 'analog-2'}}}
       {{>analog-display {pin_name: 'analog-3'}}}
+      </fieldset>
       <br />
 
       <div id='header1'></div>
