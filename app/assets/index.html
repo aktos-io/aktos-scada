@@ -105,7 +105,7 @@
 
         {{#partial slider}}
         <div class="switch-actor slider" >
-          <input type="range" name={{ .pin_name }} value='{{ .val }}' min="0" max="100" />
+          <input type="range" name={{ .pin_name }} value='{{ .val }}' min="0" max="1000" data-highlight="true"  />
         </div>
         {{/partial}}
 
@@ -120,7 +120,9 @@
       <div id="container" data-role="page" data-theme="b">
 
         <h2> Input Output Test </h2>
-        {{>slider {pin_name:"test_slider", val: "45"}}}
+        <fieldset>
+        {{>slider {pin_name:"test-slider", val: "45"}}}
+        </fieldset>
         <fieldset data-role="controlgroup" data-type="horizontal">
           {{>switch-button {pin_name: 'forward-limit', label: 'F-limit'}}}
           {{>switch-button {pin_name: 'backwards-limit', label: 'B-limit'}}}
