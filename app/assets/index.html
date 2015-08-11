@@ -59,11 +59,14 @@
             pin_name : name of this io
             val : value of this status led (which is set externally)
           ------------------------------------------------------}}
-
+          <div class="switch-actor status-led"
+           style="display: inline-block">
+          <label>
           <img style="width: 100px; height: 100px;"
-            class="switch-actor status-led"
             src="img/light-bulb-icon-{{ .val === true ? "on" : "off" }}-64.png"
             alt={{ .val === true ? "on" : "off" }} />
+            {{ .pin_name }}</label>
+          </div>
         {{/partial}}
 
         {{#partial jq-flipswitch}}
@@ -134,10 +137,11 @@
           {{>push-button {pin_name: 'forward-limit', label: 'F-limit'}}}
           {{>push-button {pin_name: 'backwards-limit', label: 'B-limit'}}}
         </fieldset>
+
         <fieldset data-role="controlgroup" data-type="horizontal">
           {{>push-button {pin_name: 'piston.dir', label: 'TEST LED'}}}
         </fieldset>
-          {{>switch-button {pin_name: 'piston.dir', label: 'TEST LED'}}}
+        {{>switch-button {pin_name: 'piston.dir', label: 'TEST LED'}}}
 
         <fieldset data-role="controlgroup" data-type="horizontal">
         {{>status-led {pin_name: 'piston.enab'}}}
