@@ -43,10 +43,9 @@
             label : text to be shown on the push button
             val : value of button (which is set externally)
           ------------------------------------------------------}}
-
-          <button
-            class="switch-actor push-button"
-          type="button" >{{.label}}</button>
+          <button class="switch-actor push-button"
+          style="{{ .connected? "" : "border: 1px solid red" }}"
+          type="button" >{{ .label }}</button>
         {{/partial}}
 
         {{#partial push-button}}
@@ -120,11 +119,19 @@
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
 
-      <div id="container" data-role="page" data-theme="b">
+      <div data-role="page" data-theme="b" id="bar">
+        <div id='header1'></div>
+        <p id='connection_status'  style='background-color: {{ connected ? "yellowgreen" : "lightgray" }}'>{{connected? "connected..." : "connecting..." }}</p>
+
+        {{#partial status-line}}
+        <p style='background-color: {{ connected ? "yellowgreen" : "lightgray" }}'>{{connected? "connected..." : "connecting..." }}</p>
+        {{/partial}}
+
+        {{>status-line {foo: 'bar'}}}
 
         <h2> Input Output Test </h2>
         <fieldset>
-        {{>slider {pin_name:"test-slider", val: "45"}}}
+        {{>slider {pin_name:"slider-1", val: "45"}}}
         </fieldset>
         <fieldset data-role="controlgroup" data-type="horizontal">
           {{>switch-button {pin_name: 'forward-limit', label: 'F-limit'}}}
@@ -155,10 +162,12 @@
         </fieldset>
         <br />
 
-        <div id='header1'></div>
-        <p id='connection_status'  style='background-color: {{ connected ? "yellowgreen" : "lightgray" }}'>{{connected? "connected..." : "connecting..." }}</p>
 
       </div>
+      <div data-role="page" data-theme="b" id="foo">
+      naber
+      </div>
+
     </script>
 
     <script>require('init');</script>
