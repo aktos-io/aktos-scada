@@ -69,38 +69,38 @@
         {{/partial}}
 
         {{#partial jq-flipswitch}}
-          {{!----------------------------------------------------
-            pin_name : name of this io
-            val : value of switch-button (which is set externally)
-          ------------------------------------------------------}}
           <input
             class="switch-actor switch-button"
             data-role="flipswitch"
             type="checkbox" data-pin-name={{ .pin_name }} >
         {{/partial}}
 
+        {{#partial jq-flipswitch-v2}}
+          <select
+            class="switch-actor switch-button"
+            data-role="flipswitch"
+            type="checkbox" data-pin-name={{ .pin_name }} >
+            
+            
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        {{/partial}}
+
         {{#partial switch-button-basic}}
-          {{!----------------------------------------------------
-            pin_name : name of this io
-            val : value of switch-button (which is set externally)
-          ------------------------------------------------------}}
           <div style="display: inline-block; margin: 10px"><input
             class="switch-actor switch-button"
             type="checkbox" data-pin-name={{ .pin_name }} ></div>
         {{/partial}}
 
         {{#partial switch-button}}
-          {{!>switch-button-basic }}
-          {{>jq-flipswitch}}
+          {{!>switch-button-basic}}
+          {{!>jq-flipswitch}}
+          {{>jq-flipswitch-v2}}
         {{/partial}}
 
 
         {{#partial analog-display}}
-          {{!----------------------------------------------------
-            pin_name : name of this io
-            val : value of toggle-switch (which is set externally)
-          ------------------------------------------------------}}
-
           <button style="padding: 1em; border: 1px solid white"
             class="switch-actor analog-display">{{ .val == null ? ' ??? ' : .val }}</button>
         {{/partial}}
@@ -119,6 +119,31 @@
           <p  >{{.connected? "connected..." : "connecting..." }}</p>
         </div>
         {{/partial}}
+        
+        {{#partial jq-persist}}
+         {{ active == this_page ? 'class="ui-btn-active ui-state-persist"' : '' }}
+        {{/partial}}
+        
+        {{#partial nav-bar}}
+          <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+            <ul>
+                <li><a {{>jq-persist {active: .active_button, this_page: "home-page"}}}  href="#home-page" id="home" data-icon="custom" data-transition="none">Ana sayfa</a></li>
+                <li><a {{>jq-persist {active: .active_button, this_page: "projects"}}} href="#projects" id="project" data-icon="custom" data-transition="none">Projeler</a></li>
+                <li><a {{>jq-persist {active: .active_button, this_page: "products"}}} href="#products" id="product" data-icon="custom" data-transition="none">Ürünler</a></li>
+                <li><a {{>jq-persist {active: .active_button, this_page: "demos"}}} href="#demos" id="demo" data-icon="custom" data-transition="none">Demo</a></li>
+                <li><a {{>jq-persist {active: .active_button, this_page: "contact-page"}}} href="#contact-page" id="contact" data-icon="custom" data-transition="none">İletişim</a></li>
+            </ul>
+          </div>
+        {{/partial}}
+        
+        {{#partial switch-list}}
+          <span class="switch-actor"></span>
+            <p> before loop: {{ connected? 'connected...': 'disconnected...' }}</p>
+          {{#my_list}}
+            <p> looping: {{ connected? 'connected...': 'disconnected...' }}</p>
+          {{/my_list}}
+        {{/partial}}
+            
 
         
         {{! -------------------------------------------------- }}
@@ -129,32 +154,63 @@
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
 
-      <div data-role="page" data-theme="b" id="bar">
-
-        
-        <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
-          <ul>
-              <li><a href="#foo" id="home" data-icon="custom">Ana sayfa</a></li>
-              <li><a href="#" id="project" data-icon="custom">Projeler</a></li>
-              <li><a href="#" id="product" data-icon="custom">Ürünler</a></li>
-              <li><a href="#" id="demo" data-icon="custom">Demo</a></li>
-              <li><a href="#" id="contact" data-icon="custom">İletişim</a></li>
-          </ul>
-        </div>
+      <div data-role="page" data-theme="b" id="home-page">
       
+      
+        {{>nav-bar {active_button: 'home-page'}}}
         <div id='header1'></div>
         {{>connection-status {}}}
 
+        <div class="ui-grid-a">
+        <div class="ui-block-a">
+          <h2> Test looping </h2>
+          {{>switch-list {my_list: ["hello", "world"], connected: true}}}
+        </div>
+        <div class="ui-block-b">
+          <h2> Input Output Test </h2>
+          <fieldset>
+          {{>slider {pin_name:"slider-1", val: 45}}}
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            {{>analog-display {pin_name: 'analog-1'}}}
+            {{>analog-display {pin_name: 'analog-2'}}}
+            {{>analog-display {pin_name: 'analog-3'}}}
+          </fieldset>
+          </fieldset>
+        </div>
+        </div>{{! /grid-a }}
+
+      </div>
+      
+      
+      {{! ----------- projects page -------------------- }}
+      {{! ---------------------------------------------- }}
+      <div data-role="page" data-theme="b" id="projects">
+        {{>nav-bar {active_button: 'projects'}}}
+      
+      </div><!-- page projects -->
+
+      
+      
+      {{! ----------- products page -------------------- }}
+      {{! ---------------------------------------------- }}
+      <div data-role="page" data-theme="b" id="products">
+        {{>nav-bar {active_button: 'products'}}}
+      
+      </div><!-- page products -->
+
+      
+      
+      {{! ----------- demos page ----------------------- }}
+      {{! ---------------------------------------------- }}
+      <div data-role="page" data-theme="b" id="demos">
+        {{>nav-bar {active_button: 'demos'}}}
         
-        <h2> Input Output Test </h2>
-        <fieldset>
-        {{>slider {pin_name:"slider-1", val: "45"}}}
-        </fieldset>
+        <h2> Delphi simulation </h2>
+
         <fieldset data-role="controlgroup" data-type="horizontal">
           {{>switch-button {pin_name: 'forward-limit', label: 'F-limit'}}}
           {{>switch-button {pin_name: 'backwards-limit', label: 'B-limit'}}}
         </fieldset>
-
         <fieldset data-role="controlgroup" data-type="horizontal">
           {{>push-button {pin_name: 'move-forward', label: 'Forward'}}}
           {{>push-button {pin_name: 'move-backwards', label: 'Backwards'}}}
@@ -168,22 +224,23 @@
         {{>switch-button {pin_name: 'piston.dir', label: 'TEST LED'}}}
 
         <fieldset data-role="controlgroup" data-type="horizontal">
-        {{>status-led {pin_name: 'piston.enab'}}}
-        {{>status-led {pin_name: 'piston.dir'}}}
+          {{>status-led {pin_name: 'piston.enab'}}}
+          {{>status-led {pin_name: 'piston.dir'}}}
         </fieldset>
 
-        <fieldset data-role="controlgroup" data-type="horizontal">
-        {{>analog-display {pin_name: 'analog-1'}}}
-        {{>analog-display {pin_name: 'analog-2'}}}
-        {{>analog-display {pin_name: 'analog-3'}}}
-        </fieldset>
-        <br />
+      </div><!-- demo page -->
+      
 
+      {{! ----------- contact page --------------------- }}
+      {{! ---------------------------------------------- }}
+      <div data-role="page" data-theme="b" id="contact-page">
+        {{>nav-bar {active_button: 'contact-page'}}}
+        
+        iletişim bilgilerimiz: ....
+      
+      </div><!-- page products -->
 
-      </div>
-      <div data-role="page" data-theme="b" id="foo">
-      naber
-      </div>
+      
 
     </script>
 
