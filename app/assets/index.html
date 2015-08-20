@@ -111,6 +111,16 @@
         </div>
         {{/partial}}
 
+
+        
+        {{#partial connection-status}}
+        <div class="switch-actor connection-status"
+          style='background-color: {{ .connected ? "yellowgreen" : "lightgray" }}'>
+          <p  >{{.connected? "connected..." : "connecting..." }}</p>
+        </div>
+        {{/partial}}
+
+        
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
         {{! -------------------------------------------------- }}
@@ -120,15 +130,22 @@
         {{! -------------------------------------------------- }}
 
       <div data-role="page" data-theme="b" id="bar">
+
+        
+        <div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+          <ul>
+              <li><a href="#foo" id="home" data-icon="custom">Ana sayfa</a></li>
+              <li><a href="#" id="project" data-icon="custom">Projeler</a></li>
+              <li><a href="#" id="product" data-icon="custom">Ürünler</a></li>
+              <li><a href="#" id="demo" data-icon="custom">Demo</a></li>
+              <li><a href="#" id="contact" data-icon="custom">İletişim</a></li>
+          </ul>
+        </div>
+      
         <div id='header1'></div>
-        <p id='connection_status'  style='background-color: {{ connected ? "yellowgreen" : "lightgray" }}'>{{connected? "connected..." : "connecting..." }}</p>
+        {{>connection-status {}}}
 
-        {{#partial status-line}}
-        <p style='background-color: {{ connected ? "yellowgreen" : "lightgray" }}'>{{connected? "connected..." : "connecting..." }}</p>
-        {{/partial}}
-
-        {{>status-line {foo: 'bar'}}}
-
+        
         <h2> Input Output Test </h2>
         <fieldset>
         {{>slider {pin_name:"slider-1", val: "45"}}}
