@@ -106,9 +106,9 @@
         {{/partial}}
 
         {{#partial slider}}
-        <div class="switch-actor slider" >
-          <input type="range" name={{ .pin_name }} value='{{ .val }}' min="0" max="1000" data-highlight="true"  />
-        </div>
+          <div class="switch-actor slider">
+          <input class="slider-input" value="{{ .val }}" min="0" max="1000" data-highlight="true">
+          </div>
         {{/partial}}
 
 
@@ -159,53 +159,41 @@
         
         {{#partial projects-buttons}}
             <a data-role="button" href="{{ .addr? addr: '#' }}" data-shadow="false" data-theme="none">
-              <img style="width: auto; height: 20em" src="{{ .src }}" /> 
+              <img style="width: auto; height: 20em" src="{{ .src }}"> 
               <p style="margin: auto">{{ .label }}</p>
             </a>        
         {{/partial}}
 
         {{! ------------------ END OF APP PARTIALS ---------- }}
   
-
+  
       {{! ----------- home page ------------------------ }}
       {{! ---------------------------------------------- }}
       
       <div data-role="page" data-theme="b" id="home-page">
-      
-      
         {{>nav-bar {active_button: 'home-page'}}}
         <div id='header1'></div>
         {{>connection-status {}}}
 
-        <div class="ui-grid-a">
-        <div class="ui-block-a">
-          <h2> Test looping </h2>
-          {{>switch-list {my_list: ["hello", "world"], connected: true}}}
-        </div>
-        <div class="ui-block-b">
-          <h2> Input Output Test </h2>
-          <fieldset>
-          {{>slider {pin_name:"slider-1", val: 45}}}
-          <fieldset data-role="controlgroup" data-type="horizontal">
-            {{>analog-display {pin_name: 'analog-1'}}}
-            {{>analog-display {pin_name: 'analog-2'}}}
-            {{>analog-display {pin_name: 'analog-3'}}}
-          </fieldset>
-          </fieldset>
-        </div>
-        </div>{{! /grid-a }}
 
-      </div>
-      
-  
+        <fieldset> 
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-2", val: 45}}}
+        {{>slider {pin_name:"slider-3", val: 45}}}
+        {{>slider {pin_name:"slider-4", val: 45}}}
+        </fieldset>
+
+      </div><!-- home page -->       
   
   
       {{! ----------- projects page -------------------- }}
       {{! ---------------------------------------------- }}
       <div data-role="page" data-theme="b" id="projects">
+        
         {{>nav-bar {active_button: 'projects'}}}
-        
-        
+
+
+
         
         <div class="ui-grid-b" data-theme="b">
           <div class="ui-block-a">
@@ -275,11 +263,13 @@
       </div><!-- page projects -->
 
       
+
       
       {{! ----------- products page -------------------- }}
       {{! ---------------------------------------------- }}
       <div data-role="page" data-theme="b" id="products">
         {{>nav-bar {active_button: 'products'}}}
+        
       
       </div><!-- page products -->
 
@@ -289,6 +279,7 @@
       {{! ---------------------------------------------- }}
       <div data-role="page" data-theme="b" id="demos">
         {{>nav-bar {active_button: 'demos'}}}
+        
         
         <h2> Delphi simulation </h2>
 
@@ -312,6 +303,21 @@
           {{>status-led {pin_name: 'piston.enab'}}}
           {{>status-led {pin_name: 'piston.dir'}}}
         </fieldset>
+        
+      
+        <h2> Test looping </h2>
+        {{>switch-list {my_list: ["hello", "world"], connected: true}}}
+        
+        <h2> Slider </h2>
+        
+
+        
+        <h2> Input Output Test </h2>
+        <fieldset data-role="controlgroup" data-type="horizontal">
+          {{>analog-display {pin_name: 'analog-1'}}}
+          {{>analog-display {pin_name: 'analog-2'}}}
+          {{>analog-display {pin_name: 'analog-3'}}}
+        </fieldset>
 
       </div><!-- demo page -->
       
@@ -320,20 +326,36 @@
       {{! ---------------------------------------------- }}
       <div data-role="page" data-theme="b" id="contact-page">
         {{>nav-bar {active_button: 'contact-page'}}}
-        
-        <section id="iletisim" data-background="img/main/depark.jpg">
         <h2>İLETİŞİM</h2>
-        <ul >
-          <li><a href="mailto:info@aktos-elektronik.com">
+        <ul data-theme="b" >
+          <li><a data-role="button" href="mailto:info@aktos-elektronik.com">
               <img src="img/icons/64x64/@.png" />
-              info@aktos-elektronik.com
-            </a></li>
+             </a> info@aktos-elektronik.com
+            </li>
                 
-                <li><a href="tel:+905553066003">0(555) 306 6003</a> </li>
-                <li><a href="https://harita.yandex.com.tr/?rtext=~38.396288%2C26.991751">DEÜ Tıp Fakültesi Kampüsü DEPARK Teknoloji Geliştirme Bölgesi Ofis: P2/E Balçova İzmir</a></li>
-        </ul>
-        </section>
+                <li>
+                <a  data-role="button"  href="tel:+905553066003">
+                
+                     <img src="img/icons/64x64/microphone.png" />
+                  </a>
+                0(555) 306 6003 </li>
+                <li>
+                <a  data-role="button"  href="https://harita.yandex.com.tr/?rtext=~38.393927%2C27.036649">
+                
+                
+                {{! 
+                  Enlem
+                  38°23′38″N (38.393927)
+                  Boylam
+                  27°2′12″E (27.036649)
+                }}
+                
+              <img src="img/icons/64x64/pin.png" />
 
+                
+              </a>  DEÜ Tıp Fakültesi Kampüsü DEPARK Teknoloji Geliştirme Bölgesi Ofis: P2/E Balçova İzmir
+              </li>
+        </ul>
       
       </div><!-- page products -->
 
