@@ -62,8 +62,8 @@
            style="display: inline-block">
           <label>
           <img style="width: 100px; height: 100px;"
-            src="img/light-bulb-icon-{{ .val === true ? "on" : "off" }}-64.png"
-            alt={{ .val === true ? "on" : "off" }} />
+            src="img/light-bulb-icon-{{ .val? "on" : "off" }}-64.png"
+            alt='{{ .val? "on" : "off" }}' />
             {{ .pin_name }}</label>
           </div>
         {{/partial}}
@@ -105,11 +105,14 @@
             class="switch-actor analog-display">{{ .val == null ? ' ??? ' : .val }}</button>
         {{/partial}}
 
+        {{! ----------------  Slider ------------------------------------ }}
+        {{! ------------------------------------------------------------- }}
+
         {{#partial slider}}
-          <div class="row slider switch-actor">
-            <div class="col-md-1 jq-slider-input" style="width: 5em; position: relative; top: -5px"><input value='{{ .val }}'></div>
-            <div class="col-md-4 jq-slider" value='{{ .val }}' min="0" max="1000" data-highlight="true"></div>
-          </div>
+          <div class="slider switch-actor">
+            <div class="jq-slider-input"><input value='{{ .val }}'></div>
+            <div class="jq-slider-container jq-slider" value='{{ .val }}' min="0" max="1000" data-highlight="true"></div>
+          </div><br />
         {{/partial}}
 
 
@@ -117,7 +120,7 @@
         {{#partial connection-status}}
         <div class="switch-actor connection-status"
           style='background-color: {{ .connected ? "yellowgreen" : "lightgray" }}'>
-          <p  >{{.connected? "connected..." : "connecting..." }}</p>
+          <p>{{.connected? "connected..." : "connecting..." }}</p>
         </div>
         {{/partial}}
         
@@ -176,8 +179,12 @@
 
       <div data-role="page" data-theme="b" id="home-page">
         {{>nav-bar {active_button: 'home-page'}}}
+        
         <div id='header1'></div>
         {{>connection-status {}}}
+        
+        
+
       </div><!-- home page -->       
       
   
@@ -303,12 +310,12 @@
         
         <h2> Slider </h2>
 
+        
         {{>slider {pin_name:"slider-2", val: 25}}}
         {{>slider {pin_name:"slider-1", val: 45}}}
         {{>slider {pin_name:"slider-1", val: 45}}}
         {{>slider {pin_name:"slider-1", val: 45}}}
         {{>slider {pin_name:"slider-1", val: 45}}}
-        
 
         
         <h2> Input Output Test </h2>
@@ -356,13 +363,15 @@
               </li>
         </ul>
       
-      </div><!-- page products -->
+      </div><!-- contact page -->
 
       
 
     </script>
 
     <script>require('init');</script>
+    
+
 
   </body>
 </html>
