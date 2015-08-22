@@ -163,7 +163,7 @@
         
         {{#partial projects-buttons}}
             <a data-role="button" href="{{ .addr? addr: '#' }}" data-shadow="false" data-theme="none">
-              <img style="width: auto; height: 20em" src="{{ .src }}"> 
+              <img class="project-buttons" src="{{ .src }}"> 
               <p style="margin: auto">{{ .label }}</p>
             </a>        
         {{/partial}}
@@ -333,21 +333,30 @@
       <div data-role="page" data-theme="b" id="contact-page">
         {{>nav-bar {active_button: 'contact-page'}}}
         <h2>İLETİŞİM</h2>
-        <ul data-theme="b" >
-          <li><a data-role="button" href="mailto:info@aktos-elektronik.com">
+        
+        <div class="row vertical-center">
+          <div class="col-md-2">
+            <a data-role="button" href="mailto:info@aktos-elektronik.com">
               <img src="img/icons/64x64/@.png" />
-             </a> info@aktos-elektronik.com
-            </li>
-                
-                <li>
-                <a  data-role="button"  href="tel:+905553066003">
+             </a>
+          </div>
+          <div class="col-md-10"><p>info@aktos-elektronik.com</p></div>
+        </div>
+        <div class="row vertical-center">
+          <div class="col-md-2">
+          
+            <a data-role="button"  href="tel:+905553066003">
                 
                      <img src="img/icons/64x64/microphone.png" />
                   </a>
-                0(555) 306 6003 </li>
-                <li>
+          </div>
+          <div class="col-md-10">
+                0(555) 306 6003 
+          </div>
+        </div>
+        <div class="row vertical-center">
+          <div class="col-md-2">
                 <a  data-role="button"  href="https://harita.yandex.com.tr/?rtext=~38.393927%2C27.036649">
-                
                 
                 {{! 
                   Enlem
@@ -356,12 +365,13 @@
                   27°2′12″E (27.036649)
                 }}
                 
-              <img src="img/icons/64x64/pin.png" />
-
-                
-              </a>  DEÜ Tıp Fakültesi Kampüsü DEPARK Teknoloji Geliştirme Bölgesi Ofis: P2/E Balçova İzmir
-              </li>
-        </ul>
+              <img src="img/icons/64x64/pin.png" /></a>
+          </div>
+          <div class="col-md-10">
+          
+            DEÜ Tıp Fakültesi Kampüsü DEPARK Teknoloji Geliştirme Bölgesi Ofis: P2/E Balçova İzmir
+          </div>           
+       </div>
       
       </div><!-- contact page -->
 
