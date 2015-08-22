@@ -78,8 +78,8 @@
         {{#partial jq-flipswitch-v2}}
           <select
             class="switch-actor switch-button"
-            data-role="flipswitch"
-            type="checkbox" data-pin-name={{ .pin_name }} >
+            data-role="slider"
+            data-pin-name={{ .pin_name }} >
             
             
             <option value="off">Off</option>
@@ -187,13 +187,6 @@
       <div data-role="page" data-theme="b" id="projects">
         
         {{>nav-bar {active_button: 'projects'}}}
-
-        {{>slider {pin_name:"slider-2", val: 25}}}
-        {{>slider {pin_name:"slider-1", val: 45}}}
-        {{>slider {pin_name:"slider-1", val: 45}}}
-        {{>slider {pin_name:"slider-1", val: 45}}}
-        {{>slider {pin_name:"slider-1", val: 45}}}
-
         
         <div class="ui-grid-b" data-theme="b">
           <div class="ui-block-a">
@@ -309,6 +302,12 @@
         {{>switch-list {my_list: ["hello", "world"], connected: true}}}
         
         <h2> Slider </h2>
+
+        {{>slider {pin_name:"slider-2", val: 25}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
         
 
         
