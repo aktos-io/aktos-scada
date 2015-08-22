@@ -106,8 +106,9 @@
         {{/partial}}
 
         {{#partial slider}}
-          <div class="switch-actor slider">
-          <input class="slider-input" value="{{ .val }}" min="0" max="1000" data-highlight="true">
+          <div class="row slider switch-actor">
+            <div class="col-md-1 jq-slider-input" style="width: 5em; position: relative; top: -5px"><input value='{{ .val }}'></div>
+            <div class="col-md-4 jq-slider" value='{{ .val }}' min="0" max="1000" data-highlight="true"></div>
           </div>
         {{/partial}}
 
@@ -170,20 +171,15 @@
       {{! ----------- home page ------------------------ }}
       {{! ---------------------------------------------- }}
       
+      <div data-role="page" id="lan">
+      </div>
+
       <div data-role="page" data-theme="b" id="home-page">
         {{>nav-bar {active_button: 'home-page'}}}
         <div id='header1'></div>
         {{>connection-status {}}}
-
-
-        <fieldset> 
-        {{>slider {pin_name:"slider-1", val: 45}}}
-        {{>slider {pin_name:"slider-2", val: 45}}}
-        {{>slider {pin_name:"slider-3", val: 45}}}
-        {{>slider {pin_name:"slider-4", val: 45}}}
-        </fieldset>
-
       </div><!-- home page -->       
+      
   
   
       {{! ----------- projects page -------------------- }}
@@ -192,7 +188,11 @@
         
         {{>nav-bar {active_button: 'projects'}}}
 
-
+        {{>slider {pin_name:"slider-2", val: 25}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
+        {{>slider {pin_name:"slider-1", val: 45}}}
 
         
         <div class="ui-grid-b" data-theme="b">
