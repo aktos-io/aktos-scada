@@ -149,7 +149,7 @@
         {{/partial}}
         
         {{#partial line-graph}}
-          <div id="placeholder" style="height: 300px; width: 300px" class="line-graph" >
+          <div id="placeholder" class="line-graph" >
           </div>
         {{/partial}}
             
@@ -330,7 +330,14 @@
         {{>switch-list {my_list: ["hello", "world"], connected: true}}}
         
         <h2>Graph</h2>
-        {{>line-graph {pin_name: 'slider-2'}}}
+        <div class="ui-grid-a" style="height: 300px">
+          <div class="ui-block-a" style="height: 100%">
+            {{>line-graph {pin_name: 'slider-2'}}}
+          </div>
+          <div class="ui-block-b">
+            {{>slider {pin_name:"slider-2", val: 25}}}
+          </div>
+        </div>
         
         <h2> Slider </h2>
 
@@ -401,87 +408,7 @@
       
       </div><!-- contact page -->
 
-      
-
     </script>
-
     <script>require('init');</script>
-    
-    <script type="text/myscript">
-
-        $(function() {
-
-                // We use an inline data source in the example, usually data would
-                // be fetched from a server
-
-                var data = [],
-                        totalPoints = 300;
-
-                function getRandomData() {
-
-                        if (data.length > 0)
-                                data = data.slice(1);
-
-                        // Do a random walk
-
-                        while (data.length < totalPoints) {
-
-                                var prev = data.length > 0 ? data[data.length - 1] : 50,
-                                        y = prev + Math.random() * 10 - 5;
-
-                                if (y < 0) {
-                                        y = 0;
-                                } else if (y > 100) {
-                                        y = 100;
-                                }
-
-                                data.push(y);
-                        }
-
-                        // Zip the generated y values with the x values
-
-                        var res = [];
-                        for (var i = 0; i < data.length; ++i) {
-                                res.push([i, data[i]])
-                        }
-
-                        return res;
-                }
-
-                // Set up the control widget
-
-                var updateInterval = 30;
-
-                var plot = $.plot("#placeholder", [ getRandomData() ], {
-                        series: {
-                                shadowSize: 0   // Drawing is faster without shadows
-                        },
-                        yaxis: {
-                                min: 0,
-                                max: 100
-                        },
-                        xaxis: {
-                                show: false
-                        }
-                });
-
-                function update() {
-
-                        plot.setData([getRandomData()]);
-
-                        // Since the axes don't change, we don't need to call plot.setupGrid()
-
-                        plot.draw();
-                        setTimeout(update, updateInterval);
-                }
-
-                update();
-
-        });
-
-        </script>
-    
-
-
   </body>
 </html>
