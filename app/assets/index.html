@@ -118,10 +118,10 @@
 
         
         {{#partial connection-status}}
-        <div class="switch-actor connection-status"
-          style='background-color: {{ .connected ? "yellowgreen" : "lightgray" }}'>
-          <p>{{.connected? "connected..." : "connecting..." }}</p>
-        </div>
+          <div  data-role="footer" data-position="fixed" class="switch-actor connection-status"
+            style='background-color: {{ .connected ? "yellowgreen" : "lightgray" }}'>
+            <p>{{.connected? "connected..." : "connecting..." }}</p>
+          </div>
         {{/partial}}
         
         {{#partial jq-persist}}
@@ -146,6 +146,11 @@
           {{#my_list}}
             <p> looping: {{ connected? 'connected...': 'disconnected...' }}</p>
           {{/my_list}}
+        {{/partial}}
+        
+        {{#partial line-graph}}
+          <div id="placeholder" style="height: 300px; width: 300px" class="line-graph" >
+          </div>
         {{/partial}}
             
 
@@ -181,10 +186,26 @@
         {{>nav-bar {active_button: 'home-page'}}}
         
         <div id='header1'></div>
+        
+        <div class="ui-content">
+          <div class="ui-grid-b">
+            <div class="ui-block-a">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div><!-- column 1 -->
+            <div class="ui-block-b">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div><!-- column 2 -->
+            <div class="ui-block-c">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div><!-- column 3 -->
+          </div><!-- 3 column grid -->
+        </div><!-- content -->
+        
         {{>connection-status {}}}
         
-        
-
       </div><!-- home page -->       
       
   
@@ -308,6 +329,9 @@
         <h2> Test looping </h2>
         {{>switch-list {my_list: ["hello", "world"], connected: true}}}
         
+        <h2>Graph</h2>
+        {{>line-graph {pin_name: 'slider-2'}}}
+        
         <h2> Slider </h2>
 
         
@@ -324,6 +348,8 @@
           {{>analog-display {pin_name: 'analog-2'}}}
           {{>analog-display {pin_name: 'analog-3'}}}
         </fieldset>
+
+        {{>connection-status {}}}
 
       </div><!-- demo page -->
       
@@ -380,6 +406,80 @@
     </script>
 
     <script>require('init');</script>
+    
+    <script type="text/myscript">
+
+        $(function() {
+
+                // We use an inline data source in the example, usually data would
+                // be fetched from a server
+
+                var data = [],
+                        totalPoints = 300;
+
+                function getRandomData() {
+
+                        if (data.length > 0)
+                                data = data.slice(1);
+
+                        // Do a random walk
+
+                        while (data.length < totalPoints) {
+
+                                var prev = data.length > 0 ? data[data.length - 1] : 50,
+                                        y = prev + Math.random() * 10 - 5;
+
+                                if (y < 0) {
+                                        y = 0;
+                                } else if (y > 100) {
+                                        y = 100;
+                                }
+
+                                data.push(y);
+                        }
+
+                        // Zip the generated y values with the x values
+
+                        var res = [];
+                        for (var i = 0; i < data.length; ++i) {
+                                res.push([i, data[i]])
+                        }
+
+                        return res;
+                }
+
+                // Set up the control widget
+
+                var updateInterval = 30;
+
+                var plot = $.plot("#placeholder", [ getRandomData() ], {
+                        series: {
+                                shadowSize: 0   // Drawing is faster without shadows
+                        },
+                        yaxis: {
+                                min: 0,
+                                max: 100
+                        },
+                        xaxis: {
+                                show: false
+                        }
+                });
+
+                function update() {
+
+                        plot.setData([getRandomData()]);
+
+                        // Since the axes don't change, we don't need to call plot.setupGrid()
+
+                        plot.draw();
+                        setTimeout(update, updateInterval);
+                }
+
+                update();
+
+        });
+
+        </script>
     
 
 
