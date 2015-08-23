@@ -187,6 +187,26 @@
         
         <div id='header1'></div>
         
+        <div class="content">
+          <div class="row">
+            <div class="col-sm-4 home-col-padding">
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div><!-- column -->
+            <div class="col-sm-4 home-col-padding">
+                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+ 
+            </div><!-- column -->
+            <div class="col-sm-4 home-col-padding">
+                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+ 
+            </div><!-- column -->
+          </div><!-- row --> 
+        </div><!-- content -->
+        
+        {{!
         <div class="ui-content">
           <div class="ui-grid-b">
             <div class="ui-block-a">
@@ -203,6 +223,7 @@
             </div><!-- column 3 -->
           </div><!-- 3 column grid -->
         </div><!-- content -->
+        }}
         
         {{>connection-status {}}}
         
@@ -366,30 +387,27 @@
       <div data-role="page" data-theme="b" id="contact-page">
         {{>nav-bar {active_button: 'contact-page'}}}
         <h2>İLETİŞİM</h2>
-        
-        <div class="row vertical-center">
-          <div class="col-md-2">
-            <a data-role="button" href="mailto:info@aktos-elektronik.com">
-              <img src="img/icons/64x64/@.png" />
-             </a>
-          </div>
-          <div class="col-md-10"><p>info@aktos-elektronik.com</p></div>
-        </div>
-        <div class="row vertical-center">
-          <div class="col-md-2">
-          
-            <a data-role="button"  href="tel:+905553066003">
-                
-                     <img src="img/icons/64x64/microphone.png" />
-                  </a>
-          </div>
-          <div class="col-md-10">
-                0(555) 306 6003 
-          </div>
-        </div>
-        <div class="row vertical-center">
-          <div class="col-md-2">
-                <a  data-role="button"  href="https://harita.yandex.com.tr/?rtext=~38.393927%2C27.036649">
+        <div class="content">
+            
+
+    <dl class="dl-horizontal">
+
+        <dt><a data-role="button" href="mailto:info@aktos-elektronik.com">
+                  <img src="img/icons/64x64/@.png" />
+                </a></dt>
+
+        <dd style="padding: 2em;">info@aktos-elektronik.com</dd>
+
+        <dt><a data-role="button"  href="tel:+905553066003">
+                    
+                        <img src="img/icons/64x64/microphone.png" />
+                      </a></dt>
+
+        <dd style="padding: 2em;"> 0(555) 306 6003 </dd>
+
+        <dt>   
+          <div class="hidden-desktop">
+            <a  data-role="button"  href="geo:38.393927,27.036649">
                 
                 {{! 
                   Enlem
@@ -398,14 +416,41 @@
                   27°2′12″E (27.036649)
                 }}
                 
-              <img src="img/icons/64x64/pin.png" /></a>
-          </div>
-          <div class="col-md-10">
+                <img src="img/icons/64x64/pin.png" /></a>
+          </div><!-- hidden desktop --> 
+          <div class="visible-desktop">
+            <a  data-role="button"  href="#">
+                
+                {{! 
+                  Enlem
+                  38°23′38″N (38.393927)
+                  Boylam
+                  27°2′12″E (27.036649)
+                }}
+                
+                <img src="img/icons/64x64/pin.png" /></a>
+          </div><!-- visible desktop --> 
           
-            DEÜ Tıp Fakültesi Kampüsü DEPARK Teknoloji Geliştirme Bölgesi Ofis: P2/E Balçova İzmir
-          </div>           
-       </div>
-      
+                
+        </dt>
+                
+
+        <dd style="padding: 2em;">                
+          <div> DEÜ Tıp Fakültesi Kampüsü DEPARK Teknoloji Geliştirme Bölgesi Ofis: P2/E Balçova İzmir
+          </div>
+          
+          <div class="hidden-phone" style="padding-top: 2em;">
+              <img style="background-image: url(http://static-maps.yandex.ru/1.x/?lang=en-US&ll=-73.7638,42.6564&z=13&l=map&size=600,300);" src="http://static-maps.yandex.ru/1.x/?lang=en-US&ll=-73.7638,42.6564&z=13&l=map&size=600,300" alt="Yandex Map of -73.7638,42.6564">
+          
+          </div><!-- hidden phone -->
+        
+        
+        </dd>
+
+    </dl>
+
+
+        </div><!-- bootstrap content --> 
       </div><!-- contact page -->
 
     </script>
