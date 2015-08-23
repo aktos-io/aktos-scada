@@ -118,7 +118,7 @@
 
         
         {{#partial connection-status}}
-          <div  data-role="footer" data-position="fixed" class="switch-actor connection-status"
+          <div  data-role="footer" data-tap-toggle="false" data-position="fixed" class="switch-actor connection-status"
             style='background-color: {{ .connected ? "yellowgreen" : "lightgray" }}'>
             <p>{{.connected? "connected..." : "connecting..." }}</p>
           </div>
