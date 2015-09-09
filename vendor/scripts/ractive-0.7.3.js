@@ -7707,9 +7707,12 @@
   function call(value) {
   	return value.call();
   }
+  
+  var cca_unique = 0; 
 
   function getUniqueString(str, keypaths) {
   	// get string that is unique to this expression
+        //console.log("str, keypaths: ", str, keypaths);
   	return str.replace(/_([0-9]+)/g, function (match, $1) {
   		var keypath, value;
 
@@ -7737,7 +7740,9 @@
   	// Sanitize by removing any periods or square brackets. Otherwise
   	// we can't split the keypath into keys!
   	// Remove asterisks too, since they mess with pattern observers
-  	return getKeypath("${" + uniqueString.replace(/[\.\[\]]/g, "-").replace(/\*/, "#MUL#") + "}");
+        cca_unique += 1; 
+        console.log("unique string: ", uniqueString); 
+  	return getKeypath("${" + uniqueString.replace(/[\.\[\]]/g, "-").replace(/\*/, "#MUL#") + String(cca_unique) + "}");
   }
 
   function isValidDependency(keypath) {
