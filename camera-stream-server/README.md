@@ -1,2 +1,1 @@
-install libjpeg-turbo-dev first: 
-	apt-get install libjpeg-turbo-dev
+Detached from this repository, see https://github.com/ceremcem/mjpeg_streamer
