@@ -17,7 +17,12 @@ install-npm-packages:
 
 LOGINUSER := $$USER
 
-production-update:
+get-changes:
+	git stash 
+	git pull 
+	git stash pop 
+
+production-update: get-changes
 	# build everything into ./public
 	rm -r public 2> /dev/null & true
 	sudo sh -c "ulimit -n 65536; sudo -u $(LOGINUSER) brunch build";

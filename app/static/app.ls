@@ -1,4 +1,4 @@
-development = yes
+development = no
 
 require! {
   '../modules/aktos-dcs': {
