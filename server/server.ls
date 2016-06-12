@@ -23,10 +23,10 @@ for i in static-folders
   console.log "serving static folder: #{i}..."
   app.use "/#{i}", express.static "#{pub-dir}/#{i}"
 
-app.get '/', (req, res) ->
+app.get "/", (req, res) ->
   res.send-file "#{pub-dir}/index.html"
 
-app.get '/map', (req, res) ->
+app.get "/map", (req, res) ->
   res.send-file "#{pub-dir}/map.html"
 
 http.listen 4000 ->
