@@ -250,19 +250,12 @@ RactivePartial!register ->
     about-us:
       header: \Hakkımızda
       body-short: """
-        Yıllar süren saha tecrübeleri neticesinde bir karara vardık: Otomasyon alanındaki işlerin %90'ında telefon açmak yerine güvercinle haberleşiliyor, araba satın alınsa tekerleksiz geliyor, çay içseniz demlik parası isteniyor, uçak tercih edilse 48 saat rötar yapıyor, dava açsanız 70 sene sürüyor.
-
-        "Hayat böyle saçma şeyler için fazla kısa" dedik ve ihtiyacımız olanı kendimiz ürettik.
+        Aktos Elektronik, IoT (internet of things) sistemleri kurarken ihtiyaç duyduğu yazılım ve donanımları kendisi üretir.
+        Tasarlamakta ve yönetmekte güçlük çekilen büyüklüklerdeki dağınık/karmaşık projeleri hedefler.
+        Ürettiği yazılımları açık kaynak kodlu olarak paylaşır. Müşteriye özel tasarım yapar. İyi günler diler.
         """
 
       body-rest: """
-        [**A**](#)çık [**K**](#)aynaklı [**T**](#)elemetri ve [**O**](#)tomasyon [**S**](#)istemleri üretiyor ve bunları kullanarak projeler gerçekleştiriyoruz. Odak noktamızda 1000 giriş çıkışın üzerindeki tesis ve sistemlerin otomasyonları ve binlerce mobil/sabit sistemin birbirine internet üzerinden bağlı çalışması gereken sistemler bulunuyor.
-
-        İşlerimizin çoğunda problemleri yazılımla çözeriz. Gerektiğinde elektronik donanım tasarlamak, imal etmek, tersine mühendislik çalışması yapmak ve mekanik donanım imal etmek de faaliyet konumuzun ayrılmaz birer parçasıdır.
-
-        Küçük ve orta ölçekli projeleri müşterinin talep edeceği herhangi bir platformda (Omron, GE Fanuc, Phoenix Contact, Trio Motion, vb...) yapabilmekle birlikte kendi platformumuz olan [aktos-dcs](#/aktos-dcs), [aktos-scada](#/aktos-scada) ve [aktos-io](#/aktos-io) kullanarak yapmayı tercih ederiz.
-
-        Büyük ölçekli projelerde yazılım alt yapısı olarak [aktos-dcs](#/aktos-dcs) ve [aktos-scada](#/aktos-scada) kullanırız. Müşteri, donanım markası konusunda (Aktos, Omron, GE Fanuc, Phoenix Contact, OEM) tercih yapmakta özgürdür.
         """
     news:
       * target-date: "13.09.2015"
