@@ -51,7 +51,7 @@ Crossbar.io : https://github.com/crossbario
 * install [Node.js](http://nodejs.org/)
 * install global dependencies:
 
-  * as root: `npm install -g livescript brunch pm2`
+  * as root: `npm install -g livescript brunch@1.8.5 pm2`
   * install libzmq-4.x
 
           sudo apt-get install libzmq3-dev  # or install from source
